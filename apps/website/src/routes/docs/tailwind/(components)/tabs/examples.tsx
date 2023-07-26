@@ -1,20 +1,17 @@
-import { component$, Slot, useSignal, useStore, useStyles$ } from '@builder.io/qwik';
-import { Tab, TabList, TabPanel, Tabs } from '@qwik-ui/headless';
+import { component$, Slot, useSignal, useStore } from '@builder.io/qwik';
+import { Tab, TabList, TabPanel, Tabs } from '@qwik-ui/tailwind';
 import { PreviewCodeExample } from '../../../_components/preview-code-example/preview-code-example';
-import styles from './index.css?inline';
 
 export const Example01 = component$(() => {
-  useStyles$(styles);
-
   return (
     <PreviewCodeExample>
       <div q:slot="actualComponent" class="tabs-example">
         <h3>Danish Composers</h3>
-        <Tabs behavior="automatic">
+        <Tabs behavior="manual">
           <TabList>
-            <Tab>Maria Ahlefeldt</Tab>
-            <Tab>Carl Andersen</Tab>
-            <Tab>Ida Henriette da Fonseca</Tab>
+            <Tab isLifted={true}>Maria Ahlefeldt</Tab>
+            <Tab isLifted={true}>Carl Andersen</Tab>
+            <Tab isLifted={true}>Ida Henriette da Fonseca</Tab>
           </TabList>
           <TabPanel>
             <p>Maria Theresia Ahlefeldt (16 January 1755 - 20 December 1810) was a ...</p>

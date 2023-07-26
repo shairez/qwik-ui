@@ -1,19 +1,19 @@
 import {
+  $,
+  Slot,
   component$,
+  useComputed$,
   useContext,
   useId,
-  Slot,
-  useTask$,
-  $,
   useSignal,
+  useTask$,
   useVisibleTask$,
   type QwikIntrinsicElements,
-  type QwikMouseEvent,
-  useComputed$,
+  type QwikMouseEvent
 } from '@builder.io/qwik';
-import { tabsContextId } from './tabs-context-id';
-import { KeyCode } from '../../utils/key-code.type';
 import { isBrowser, isServer } from '@builder.io/qwik/build';
+import { KeyCode } from '../../utils/key-code.type';
+import { tabsContextId } from './tabs-context-id';
 
 export type TabProps = {
   onClick$?: (event: QwikMouseEvent) => void;
@@ -29,7 +29,7 @@ export const preventedKeys = [
   KeyCode.ArrowDown,
   KeyCode.ArrowUp,
   KeyCode.ArrowLeft,
-  KeyCode.ArrowRight,
+  KeyCode.ArrowRight
 ];
 
 export const Tab = component$((props: TabProps) => {
@@ -44,7 +44,7 @@ export const Tab = component$((props: TabProps) => {
     return props.selectedClassName || contextService.selectedClassName;
   });
 
-  useTask$(async function indexInitTask({ cleanup }) {
+  useTask$(async function indexInitTask() {
     if (isServer) {
       serverAssignedIndexSig.value =
         await contextService.getNextServerAssignedTabIndex$();
@@ -53,15 +53,16 @@ export const Tab = component$((props: TabProps) => {
     if (isBrowser) {
       contextService.reIndexTabs$();
     }
+  });
+
+  useVisibleTask$(function indexCleanupTask({ cleanup }) {
     cleanup(() => {
       contextService.reIndexTabs$();
     });
   });
 
   useTask$(async function isSelectedTask({ track }) {
-    const isTabSelected = await track(() =>
-      contextService.isTabSelected$(uniqueTabId)
-    );
+    const isTabSelected = await track(() => contextService.isTabSelected$(uniqueTabId));
     if (isServer && !props.disabled) {
       isSelectedSig.value = await contextService.isIndexSelected$(
         serverAssignedIndexSig.value
@@ -117,9 +118,7 @@ export const Tab = component$((props: TabProps) => {
       tabIndex={isSelectedSig.value ? 0 : -1}
       aria-controls={'tabpanel-' + matchedTabPanelIdSig.value}
       class={`${
-        isSelectedSig.value
-          ? `selected ${selectedClassNameSig.value || ''}`
-          : ''
+        isSelectedSig.value ? `selected ${selectedClassNameSig.value || ''}` : ''
       }${props.class ? ` ${props.class}` : ''}`}
       onClick$={(event) => {
         contextService.selectTab$(uniqueTabId);

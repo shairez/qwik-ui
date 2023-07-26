@@ -1,3 +1,4 @@
-export * from './tabs';
 export * from './tab';
-export * from './tabPanel';
+export * from './tab-list';
+export * from './tab-panel';
+export * from './tabs';

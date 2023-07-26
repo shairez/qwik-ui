@@ -16,9 +16,7 @@ export const PreviewCodeExample = component$(() => {
         <Tab class="px-4 py-2 rounded-tl-xl hover:bg-[#6daeff] dark:hover:bg-[#423dff]">
           Preview
         </Tab>
-        <Tab class="px-4 py-2 hover:bg-[#6daeff] dark:hover:bg-[#423dff]">
-          Code
-        </Tab>
+        <Tab class="px-4 py-2 hover:bg-[#6daeff] dark:hover:bg-[#423dff]">Code</Tab>
       </TabList>
       <TabPanel class="rounded-b-xl  p-12 bg-slate-200 dark:bg-slate-900">
         <section class="flex flex-col items-center">
