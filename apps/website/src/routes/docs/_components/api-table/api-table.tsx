@@ -11,25 +11,27 @@ type APITableProps = {
 
 export const APITable = component$(({ propDescriptors }: APITableProps) => {
   return (
-    <div class="overflow-x-auto">
+    <div class="overflow-auto">
       <table class="w-full min-w-[540px] border-b border-gray-700 text-left sm:min-w-full">
         <tbody class="divide-y divide-gray-700">
-          <tr class="w-1/4 text-white">
+          <tr class="w-1/4 dark:text-white ">
             <td class="w-1/6 whitespace-nowrap py-2 pl-4 text-sm font-medium sm:pl-0">
               Prop
             </td>
-            <td class="w-1/6 whitespace-nowrap py-2 text-sm font-medium">Type</td>
-            <td class="w-2/3 whitespace-nowrap py-2 text-sm font-medium">Description</td>
+            <td class="w-1/6 whitespace-nowrap py-2 text-sm font-medium ">Type</td>
+            <td class="w-2/3 whitespace-nowrap py-2 text-sm font-medium ">Description</td>
           </tr>
           {propDescriptors?.map((propDescriptor) => {
             return (
               <tr key={propDescriptor.name}>
                 <td class="prose prose-sm py-3 pl-4 align-baseline sm:pl-0 ">
-                  <code class="bg-indigo-900 rounded-md">{propDescriptor.name}</code>
+                  <code class="bg-indigo-200 dark:bg-indigo-900 rounded-md mr-6">
+                    {propDescriptor.name}
+                  </code>
                 </td>
                 <td class="prose prose-sm py-3 align-baseline">
                   <span class="flex items-center">
-                    <code class="bg-gray-300 dark:bg-gray-700 rounded-md ">
+                    <code class="bg-gray-300 dark:bg-gray-700">
                       {propDescriptor.type}
                     </code>
                     {propDescriptor.info && (
